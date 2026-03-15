@@ -10,7 +10,7 @@ class BedrockService:
             service_name="bedrock-runtime",
             region_name=os.getenv("AWS_REGION", "us-east-1")
         )
-        self.model_id = "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+        self.model_id = ""
     
     def invoke_claude(self, prompt_text: str, max_tokens: int = 1000) -> Dict[str, Any]:
         """Invoke Claude model via Bedrock"""
