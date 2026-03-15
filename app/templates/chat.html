@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Framework AI Assistant</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Robot Framework AI Assistant</span>
+                </div>
+                <div class="status">
+                    <span id="connectionStatus" class="status-disconnected">
+                        <i class="fas fa-circle"></i> Disconnected
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <main class="chat-container">
+            <div id="chatMessages" class="chat-messages">
+                <!-- Welcome message -->
+                <div class="message assistant-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            <h3>Welcome to Robot Framework AI Assistant! 🤖</h3>
+                            <p>I can help you create and manage Robot Framework automation projects. Here are some things you can ask me:</p>
+                            <ul>
+                                <li><strong>"Create an e-commerce automation project"</strong> - I'll set up a complete RF project structure</li>
+                                <li><strong>"Add a login test case"</strong> - I'll create test cases for you</li>
+                                <li><strong>"Create keywords resource file"</strong> - I'll generate reusable keywords</li>
+                                <li><strong>"Add variables for API testing"</strong> - I'll create variable files</li>
+                            </ul>
+                            <p>Just type your request below and I'll help you build your automation framework! ✨</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="input-area">
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Type your Robot Framework request here... (e.g., 'Create a web automation project')"
+                        rows="1"
+                    ></textarea>
+                    <button id="sendButton" class="send-button" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Confirm Action</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="confirmationMessage"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmYes" class="btn btn-primary">Yes, Proceed</button>
+                    <button id="confirmNo" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loadingIndicator" class="loading-indicator">
+            <div class="loading-spinner">
+                <i class="fas fa-cog fa-spin"></i>
+            </div>
+            <span>Processing your request...</span>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 

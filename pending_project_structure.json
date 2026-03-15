@@ -1,0 +1,15 @@
+{
+  "project_name": "automation_project",
+  "project_type": null,
+  "folder": [
+    "automation_project/tests",
+    "automation_project/resources"
+  ],
+  "files": [
+    "automation_project/tests/login_tests.robot",
+    "automation_project/tests/main_flow_tests.robot",
+    "automation_project/resources/keywords.robot",
+    "automation_project/resources/variables.robot",
+    "automation_project/requirements.txt"
+  ]
+}

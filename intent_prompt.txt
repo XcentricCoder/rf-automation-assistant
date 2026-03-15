@@ -1,0 +1,144 @@
+You are an expert in Robot Framework automation. Analyze this user request and classify the intent.
+You must ONLY use one of the following intents: "create_project","create_test","create_resource","confirm", "deny", "unknown".
+Do NOT invent or use any other intent names.Do not use modify_intent as an intent.
+If you use any intent not in the list, it will be considered a critical error:
+
+IMPORTANT: For any request to add or delete a folder or file (even in an existing project), always use intent "create_project".
+Do NOT use "create_resource" for file or folder operations. 
+
+ User message: "{user_message}"
+ 
+Classify into one of these intents:
+- create_project: User wants to create a new RF project structure 
+- create_project: User wants to  add a folder or file to the project structure
+- create_project: User wants to  delete a folder or file from the project structure
+- create_test: User wants to create test cases
+- create_resource: User wants to create resource files (keywords, variables)
+- confirm: User is confirming an action (yes, confirm, proceed, etc.)
+- deny: User is denying an action (no, cancel, stop, etc.)
+- unknown: Cannot determine intent
+
+IMPORTANT: For any request to add or delete a folder or file (even in an existing project),
+always use intent "create_project".
+Do NOT use "create_resource" for folder or file operations.
+
+Also extract these entities if present:
+- project_name: Name of the project
+- project_type: Type of project (web, api, mobile, desktop)
+- test_name: Name of test case
+- test_description: Description of what test should do
+- resource_type: Type of resource (keywords, variables, library)
+- folder_name: additional folders to be added or deleted if any
+- file_name: additional files to be added or deleted if any
+
+Return ONLY a valid JSON response in this exact format:
+{{
+    "intent": "intent_name",
+    "entities": {{
+        "project_name": "extracted_name_or_null",
+        "project_type": "web_or_api_or_mobile_or_desktop",
+        "test_name": "test_name_or_null",
+        "test_description": "description_or_null",
+        "resource_type": "keywords_or_variables_or_library",
+        "folder_name": "additional_folders",
+        "file_name": "additional_files"
+    }},
+    "confidence": 0.95
+}}
+
+Example 1: User wants to add folder "xyz" to the project "demo":
+{{
+    "intent": "create_project",
+    "entities": {{
+        "project_name": "demo",
+        "project_type": null,
+        "test_name": null,
+        "test_description": null,
+        "resource_type": null,
+        "folder_name": "xyz",
+        "file_name": null
+    }},
+    "confidence": 0.95
+}}
+
+Example 2:   User wants to delete folder "rpa" from project "qrt":
+{{
+    "intent": "create_project",
+    "entities": {{
+        "project_name": "qrt",
+        "project_type": null,
+        "test_name": null,
+        "test_description": null,
+        "resource_type": null,
+        "folder_name": "rpa",
+        "file_name": null
+    }},
+    "confidence": 0.95
+}}
+
+Example 3 :User wants to add a file named contents.txt to project structure dell
+{{
+    "intent": "create_project",
+    "entities": {{
+      "project_name": "dell",
+      "project_type": null,
+      "test_name": null,
+      "test_description": null,
+      "resource_type": null,
+      "folder_name": null,
+      "file_name": "contents.txt"
+    }},
+    "confidence": 0.95
+  }}
+//For any request to add or delete a folder or file, always use intent "create_project".
+
+Example 4: add a file qrs.txt with content "hello world" in the project structure acd
+  Output: {{
+    "intent": "create_project",
+    "entities": {{
+      "project_name": "acd",
+      "project_type": null,
+      "test_name": null,
+      "test_description": null,
+      "resource_type": null,
+      "folder_name": null,
+      "file_name": "qrs.txt",
+      "content": "hello world"
+    }},
+    "confidence": 0.95
+  }}
+ 
+Example (Incorrect): 
+{{
+  "intent": "modify_test", 
+      "entities": {{
+        "project_name": "demo",
+        "project_type": null,
+        "test_name": null,
+        "test_description": null,
+        "resource_type": null,
+        "folder_name": "xyz",
+        "file_name": null
+    }},
+    "confidence": 0.95
+}}
+// This is invalid. Never use "modify_test".
+
+Example(Incorrect): User wants to add a file named contents.txt to project structure dell
+  Output: {{
+    "intent": "create_resource", 
+        "entities": {{
+        "project_name": "demo",
+        "project_type": null,
+        "test_name": null,
+        "test_description": null,
+        "resource_type": null,
+        "folder_name": "xyz",
+        "file_name": null
+    }},
+    "confidence": 0.95
+  }}
+  
+ // Incorrect! Never use "create_resource" for file operations.
+
+Do not include any other text, only the JSON response.
